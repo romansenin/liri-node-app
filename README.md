@@ -26,7 +26,7 @@ touch .env
 
 4. Open the file in a text editor and place the following information into it:
 
-```js
+```
 # Spotify API keys
 
 SPOTIFY_ID=your-spotify-id
