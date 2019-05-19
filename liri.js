@@ -3,22 +3,27 @@ require("dotenv").config();
 // Include the keys.js spotify object
 const keys = require("./keys");
 
+// Initialize Spotify
 const Spotify = require("node-spotify-api");
 const spotify = new Spotify(keys.spotify);
 
 // Include the axios npm package
 const axios = require("axios");
+// Include the moment npm package
 const moment = require("moment");
+// Grab the fs package to handle read/write.
+const fs = require("fs");
 
+// Get command line arguments
 const args = process.argv;
-const command = args[2];
+let command = args[2];
 
 /// ????????
 
 if (!command) {
 }
 
-const term = args.splice(3).join("+");
+let term = args.splice(3).join("+");
 
 switch (command) {
   case "concert-this":
@@ -31,9 +36,16 @@ switch (command) {
     movieThis();
     break;
   case "do-what-it-says":
+    doWhatItSays();
     break;
   default:
-  //
+    console.log(
+      "Type one of the following:\n \
+    1. node liri concert-this <artist/band name here>\n \
+    2. node liri spotify-this-song '<song name here>'\n \
+    3. node liri movie-this '<movie name here>'\n \
+    4. node liri do-what-it-says"
+    );
 }
 
 function concertThis() {
@@ -118,4 +130,73 @@ function spotifyThisSong() {
       );
     });
   }
+}
+
+function movieThis() {
+  if (!term) {
+    term = "Mr.+Nobody";
+  }
+  axios
+    .get("http://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=trilogy")
+    .then(function(response) {
+      if (response.data.Response === "False") {
+        console.log(response.data.Error);
+      } else {
+        console.log(
+          [
+            "-------------------------------",
+            "Title: " + '"' + response.data.Title + '"',
+            "Year: " + response.data.Year,
+            "IMDB Rating: " + response.data.imdbRating,
+            "Rotten Tomatoes Rating: " +
+              (response.data.Ratings.length > 1
+                ? response.data.Ratings[1].Value
+                : "N/A"),
+            "Country: " + response.data.Country,
+            "Language: " + response.data.Language,
+            "Plot: " + response.data.Plot,
+            "Actors: " + response.data.Actors,
+            "-------------------------------"
+          ].join("\n\n")
+        );
+      }
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+}
+
+function doWhatItSays() {
+  let something = fs.readFile("random.txt", "utf8", function(err, data) {
+    if (err) {
+      throw err;
+    }
+    command = data.split(",")[0];
+    term = data
+      .split(",")[1]
+      .split(" ")
+      .join("+");
+    switch (command) {
+      case "concert-this":
+        concertThis();
+        break;
+      case "spotify-this-song":
+        spotifyThisSong();
+        break;
+      case "movie-this":
+        movieThis();
+        break;
+      case "do-what-it-says":
+        doWhatItSays();
+        break;
+      default:
+        console.log(
+          "Type one of the following:\n \
+              1. node liri concert-this <artist/band name here>\n \
+              2. node liri spotify-this-song '<song name here>'\n \
+              3. node liri movie-this '<movie name here>'\n \
+              4. node liri do-what-it-says"
+        );
+    }
+  });
 }
