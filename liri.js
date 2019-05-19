@@ -18,11 +18,6 @@ const fs = require("fs");
 const args = process.argv;
 let command = args[2];
 
-/// ????????
-
-if (!command) {
-}
-
 let term = args.splice(3).join("+");
 
 switch (command) {
