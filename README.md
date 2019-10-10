@@ -4,7 +4,7 @@
 
 ## Project Description
 
-LIRI is a Language Interpretation and Recognition Interface (kind of like Siri but using Language instead of Speech). It's a command line node app that takes in parameters and gives you back data.
+LIRI is a command-line Language Interpretation and Recognition Interface (kind of like Siri but using Language/Text instead of Speech). It's a command line node app that takes in parameters and gives you back data.
 
 ### How to Run
 
