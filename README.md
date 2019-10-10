@@ -20,7 +20,7 @@ There are four commands that the app recognizes:
 
      - Date of the Event in MM/DD/YYYY format
 
-      ![Concert This Command](./concert-this.gif)
+      ![Concert This Command](./media/concert-this.gif)
 
 2. `node liri.js spotify-this-song '<song name here>'`
 
@@ -36,7 +36,7 @@ There are four commands that the app recognizes:
 
    - If no song is provided then the program will default to "The Sign" by Ace of Base.
 
-      ![Spotify This Song Command](./spotify-this-song.gif)
+      ![Spotify This Song Command](./media/spotify-this-song.gif)
 
 3) `node liri.js movie-this '<movie name here>'`
 
@@ -53,7 +53,7 @@ There are four commands that the app recognizes:
 
    - If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 
-      ![Movie This Command](./movie-this.gif)
+      ![Movie This Command](./media/movie-this.gif)
 
 4) `node liri.js do-what-it-says`
 
@@ -61,7 +61,7 @@ There are four commands that the app recognizes:
 
      - Edit the text in random.txt to test out the feature for concert-this, movie-this or spotify-this-songs.
 
-     ![Do What It Says Command](./do-what-it-says.gif)
+     ![Do What It Says Command](./media/do-what-it-says.gif)
 
 ### Local Setup (NOTE: must have your own Spotify API key)
 
